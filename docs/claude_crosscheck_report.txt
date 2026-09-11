@@ -1,0 +1,17 @@
+Live claude -p cross-check sample size: 15
+  record 1: ground_truth=33 deterministic=33 claude=33 claude_agrees_with_deterministic=True
+  record 2: ground_truth=16 deterministic=16 claude=16 claude_agrees_with_deterministic=True
+  record 3: ground_truth=20 deterministic=20 claude=20 claude_agrees_with_deterministic=True
+  record 4: ground_truth=4 deterministic=4 claude=4 claude_agrees_with_deterministic=True
+  record 5: ground_truth=37 deterministic=37 claude=37 claude_agrees_with_deterministic=True
+  record 6: ground_truth=22 deterministic=22 claude=22 claude_agrees_with_deterministic=True
+  record 7: ground_truth=17 deterministic=17 claude=17 claude_agrees_with_deterministic=True
+  record 8: ground_truth=21 deterministic=21 claude=21 claude_agrees_with_deterministic=True
+  record 9: ground_truth=6 deterministic=6 claude=28 claude_agrees_with_deterministic=False
+  record 10: ground_truth=31 deterministic=31 claude=31 claude_agrees_with_deterministic=True
+  record 11: ground_truth=31 deterministic=31 claude=31 claude_agrees_with_deterministic=True
+  record 12: ground_truth=4 deterministic=4 claude=4 claude_agrees_with_deterministic=True
+  record 13: ground_truth=17 deterministic=17 claude=17 claude_agrees_with_deterministic=True
+  record 14: ground_truth=25 deterministic=25 claude=25 claude_agrees_with_deterministic=True
+  record 15: ground_truth=27 deterministic=27 claude=27 claude_agrees_with_deterministic=True
+Agreement rate (claude vs deterministic): 14/15

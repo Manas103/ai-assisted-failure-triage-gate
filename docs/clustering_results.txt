@@ -1,0 +1,45 @@
+Records loaded: 4000
+Distinct clusters formed: 40
+True signatures recovered: 40 / 40
+
+Per-signature recovery:
+  sig 01 (sig01_pagination_off_by_one): recovered=True coverage=1.0 purity=1.0 true_count=141 cluster_size=141
+  sig 02 (sig02_tz_naive_compare): recovered=True coverage=1.0 purity=1.0 true_count=85 cluster_size=85
+  sig 03 (sig03_boundary_inclusive): recovered=True coverage=1.0 purity=1.0 true_count=92 cluster_size=92
+  sig 04 (sig04_stale_cache): recovered=True coverage=1.0 purity=1.0 true_count=111 cluster_size=111
+  sig 05 (sig05_float_epsilon): recovered=True coverage=1.0 purity=1.0 true_count=69 cluster_size=69
+  sig 06 (sig06_mutable_default_arg): recovered=True coverage=1.0 purity=1.0 true_count=92 cluster_size=92
+  sig 07 (sig07_int_division_truncation): recovered=True coverage=1.0 purity=1.0 true_count=104 cluster_size=104
+  sig 08 (sig08_unicode_truncate): recovered=True coverage=1.0 purity=1.0 true_count=65 cluster_size=65
+  sig 09 (sig09_sort_tiebreak): recovered=True coverage=1.0 purity=1.0 true_count=89 cluster_size=89
+  sig 10 (sig10_dedupe_collision): recovered=True coverage=1.0 purity=1.0 true_count=84 cluster_size=84
+  sig 11 (sig11_retry_backoff_offbyone): recovered=True coverage=1.0 purity=1.0 true_count=95 cluster_size=95
+  sig 12 (sig12_broad_exception_swallow): recovered=True coverage=1.0 purity=1.0 true_count=79 cluster_size=79
+  sig 13 (sig13_textual): recovered=True coverage=1.0 purity=1.0 true_count=49 cluster_size=49
+  sig 14 (sig14_textual): recovered=True coverage=1.0 purity=1.0 true_count=94 cluster_size=94
+  sig 15 (sig15_textual): recovered=True coverage=1.0 purity=1.0 true_count=115 cluster_size=115
+  sig 16 (sig16_textual): recovered=True coverage=1.0 purity=1.0 true_count=126 cluster_size=126
+  sig 17 (sig17_textual): recovered=True coverage=1.0 purity=1.0 true_count=164 cluster_size=164
+  sig 18 (sig18_textual): recovered=True coverage=1.0 purity=1.0 true_count=54 cluster_size=54
+  sig 19 (sig19_textual): recovered=True coverage=1.0 purity=1.0 true_count=62 cluster_size=62
+  sig 20 (sig20_textual): recovered=True coverage=1.0 purity=1.0 true_count=121 cluster_size=121
+  sig 21 (sig21_textual): recovered=True coverage=1.0 purity=1.0 true_count=131 cluster_size=131
+  sig 22 (sig22_textual): recovered=True coverage=1.0 purity=1.0 true_count=173 cluster_size=173
+  sig 23 (sig23_textual): recovered=True coverage=1.0 purity=1.0 true_count=53 cluster_size=53
+  sig 24 (sig24_textual): recovered=True coverage=1.0 purity=1.0 true_count=88 cluster_size=88
+  sig 25 (sig25_textual): recovered=True coverage=1.0 purity=1.0 true_count=98 cluster_size=98
+  sig 26 (sig26_textual): recovered=True coverage=1.0 purity=1.0 true_count=133 cluster_size=133
+  sig 27 (sig27_textual): recovered=True coverage=1.0 purity=1.0 true_count=156 cluster_size=156
+  sig 28 (sig28_textual): recovered=True coverage=1.0 purity=1.0 true_count=65 cluster_size=65
+  sig 29 (sig29_textual): recovered=True coverage=1.0 purity=1.0 true_count=71 cluster_size=71
+  sig 30 (sig30_textual): recovered=True coverage=1.0 purity=1.0 true_count=125 cluster_size=125
+  sig 31 (sig31_textual): recovered=True coverage=1.0 purity=1.0 true_count=125 cluster_size=125
+  sig 32 (sig32_textual): recovered=True coverage=1.0 purity=1.0 true_count=135 cluster_size=135
+  sig 33 (sig33_textual): recovered=True coverage=1.0 purity=1.0 true_count=62 cluster_size=62
+  sig 34 (sig34_textual): recovered=True coverage=1.0 purity=1.0 true_count=78 cluster_size=78
+  sig 35 (sig35_textual): recovered=True coverage=1.0 purity=1.0 true_count=102 cluster_size=102
+  sig 36 (sig36_textual): recovered=True coverage=1.0 purity=1.0 true_count=118 cluster_size=118
+  sig 37 (sig37_textual): recovered=True coverage=1.0 purity=1.0 true_count=155 cluster_size=155
+  sig 38 (sig38_textual): recovered=True coverage=1.0 purity=1.0 true_count=54 cluster_size=54
+  sig 39 (sig39_textual): recovered=True coverage=1.0 purity=1.0 true_count=90 cluster_size=90
+  sig 40 (sig40_textual): recovered=True coverage=1.0 purity=1.0 true_count=97 cluster_size=97

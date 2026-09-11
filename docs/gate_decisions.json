@@ -1,0 +1,119 @@
+{
+  "n_records": 4000,
+  "signatures_recovered": 40,
+  "signatures_total": 40,
+  "real_fixture_proposals_run": 12,
+  "filed": 10,
+  "rejected": 2,
+  "unproven_attributions_filed": 0,
+  "decisions": [
+    {
+      "signature_id": 1,
+      "signature_key": "sig01_pagination_off_by_one",
+      "records_attributed_this_batch": 141,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 2,
+      "signature_key": "sig02_tz_naive_compare",
+      "records_attributed_this_batch": 85,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": false,
+      "filed": false,
+      "reason": "mutation gate failed (1/2 mutants killed)"
+    },
+    {
+      "signature_id": 3,
+      "signature_key": "sig03_boundary_inclusive",
+      "records_attributed_this_batch": 92,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 4,
+      "signature_key": "sig04_stale_cache",
+      "records_attributed_this_batch": 111,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 5,
+      "signature_key": "sig05_float_epsilon",
+      "records_attributed_this_batch": 69,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 6,
+      "signature_key": "sig06_mutable_default_arg",
+      "records_attributed_this_batch": 92,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 7,
+      "signature_key": "sig07_int_division_truncation",
+      "records_attributed_this_batch": 104,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 8,
+      "signature_key": "sig08_unicode_truncate",
+      "records_attributed_this_batch": 65,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 9,
+      "signature_key": "sig09_sort_tiebreak",
+      "records_attributed_this_batch": 89,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 10,
+      "signature_key": "sig10_dedupe_collision",
+      "records_attributed_this_batch": 84,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    },
+    {
+      "signature_id": 11,
+      "signature_key": "sig11_retry_backoff_offbyone",
+      "records_attributed_this_batch": 95,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": false,
+      "filed": false,
+      "reason": "mutation gate failed (1/2 mutants killed)"
+    },
+    {
+      "signature_id": 12,
+      "signature_key": "sig12_broad_exception_swallow",
+      "records_attributed_this_batch": 79,
+      "repro_gate_accepted": true,
+      "mutation_gate_admitted": true,
+      "filed": true,
+      "reason": "both gates green: repro reproduces the defect and the proposed test kills its mutant(s)"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+Batch size: 4000 records
+Signatures recovered by clustering: 40/40
+Real-fixture proposals run through both gates this session: 12
+Filed: 10   Rejected: 2   Unproven attributions filed: 0
+
+signature                         records   repro  mutation   decision  reason
+sig01_pagination_off_by_one           141    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig02_tz_naive_compare                 85    True     False   REJECTED  mutation gate failed (1/2 mutants killed)
+sig03_boundary_inclusive               92    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig04_stale_cache                     111    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig05_float_epsilon                    69    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig06_mutable_default_arg              92    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig07_int_division_truncation         104    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig08_unicode_truncate                 65    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig09_sort_tiebreak                    89    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig10_dedupe_collision                 84    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)
+sig11_retry_backoff_offbyone           95    True     False   REJECTED  mutation gate failed (1/2 mutants killed)
+sig12_broad_exception_swallow          79    True      True      FILED  both gates green: repro reproduces the defect and the proposed test kills its mutant(s)

@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# DuckDB store is regenerable data, not source; regenerate with:
+#   PYTHONPATH=src python src/triage/generate_records.py data/failures.duckdb
+data/*.duckdb

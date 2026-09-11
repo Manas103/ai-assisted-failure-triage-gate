@@ -1,0 +1,130 @@
+PROMPT:
+You are triaging CI failure records against a fixed library of 40 named failure signatures. For each record below, output the single best-matching signature id (an integer 1-40) based on error_type and message. Respond with ONLY a JSON object mapping record_id (string) to signature id (integer), no prose, no markdown fences.
+
+Signature library:
+1: Pagination fencepost error
+2: Timezone-naive comparison
+3: Exclusive/inclusive boundary bug
+4: Stale cache invalidation
+5: Float equality instead of tolerance
+6: Mutable default argument
+7: Integer division truncation
+8: Byte-length truncation bug
+9: Missing sort tie-break key
+10: Dedupe key collision
+11: Retry loop off-by-one
+12: Overly broad except clause
+13: Database connection timeout
+14: Null attribute access
+15: Worker out of memory
+16: Connection reset by peer
+17: Permission denied on artifact store
+18: Malformed JSON payload
+19: Upstream HTTP 500
+20: Disk full during write
+21: DNS resolution failure
+22: Deadlock detected
+23: Schema validation error
+24: Expired auth token
+25: Rate limit exceeded
+26: Missing input file
+27: Recursion limit exceeded
+28: CI assertion failure, unrelated flake
+29: Flaky test timeout
+30: Container OOM killed
+31: Pod crash loop
+32: Merge conflict in CI checkout
+33: Dependency install failure
+34: Build tool failure
+35: TLS certificate verification failed
+36: Missing required environment variable
+37: Port already in use
+38: Disk quota exceeded for tenant
+39: Message queue consumer lag
+40: GPU out of memory
+
+Records:
+record_id=1
+error_type=InstallError
+message=failed to install package shard_618400, exit code 805
+
+record_id=2
+error_type=ConnectionResetError
+message=connection reset by peer while sending to invoice_331128 (errno 699)
+
+record_id=3
+error_type=OSError
+message=[Errno 28] No space left on device writing req_363262 (81 bytes pending)
+
+record_id=4
+error_type=AssertionError
+message=get_or_compute(partition_847948) returned a value 710s past ttl expiry, cache never invalidated
+
+record_id=5
+error_type=OSError
+message=[Errno 98] Address already in use: customer_728570:849
+
+record_id=6
+error_type=DeadlockError
+message=deadlock detected involving transaction batch_109856, retried 895 time(s)
+
+record_id=7
+error_type=PermissionError
+message=[Errno 13] Permission denied: 'tenant_643774' (attempt 762)
+
+record_id=8
+error_type=socket.gaierror
+message=Name or service not known: queue_848646 (attempt 482)
+
+record_id=9
+error_type=AssertionError
+message=add_item(user_627881) leaked 48 item(s) from a previous unrelated call
+
+record_id=10
+error_type=CrashLoopBackOff
+message=pod invoice_596871 restarted 979 times in the last 5 minutes
+
+record_id=11
+error_type=CrashLoopBackOff
+message=pod req_152645 restarted 163 times in the last 5 minutes
+
+record_id=12
+error_type=AssertionError
+message=get_or_compute(queue_241531) returned a value 270s past ttl expiry, cache never invalidated
+
+record_id=13
+error_type=PermissionError
+message=[Errno 13] Permission denied: 'req_116883' (attempt 950)
+
+record_id=14
+error_type=RateLimitError
+message=quota exceeded for device_454342, 247 requests over limit
+
+record_id=15
+error_type=RecursionError
+message=maximum recursion depth exceeded while walking cache_909396, depth 438
+
+
+---RETURNCODE 0---
+STDOUT:
+```json
+{
+  "1": 33,
+  "2": 16,
+  "3": 20,
+  "4": 4,
+  "5": 37,
+  "6": 22,
+  "7": 17,
+  "8": 21,
+  "9": 28,
+  "10": 31,
+  "11": 31,
+  "12": 4,
+  "13": 17,
+  "14": 25,
+  "15": 27
+}
+```
+
+STDERR:

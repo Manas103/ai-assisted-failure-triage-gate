@@ -1,0 +1,9 @@
+{
+  "n_records": 4000,
+  "n_clusters": 40,
+  "signatures_total": 40,
+  "signatures_recovered": 40,
+  "attribution_correct": 4000,
+  "attribution_total": 4000,
+  "attribution_accuracy_pct": 100.0
+}
