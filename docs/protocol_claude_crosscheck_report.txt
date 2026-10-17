@@ -1,0 +1,18 @@
+Live claude -p citation-discipline cross-check, sample size: 15
+  record 0: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S1.1 (phy_rsrp)] Verify the measurement gap configuration before assuming a radio fault.'
+  record 1: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S5.2 (nas_auth)] Check for USIM/AuC sequence number desynchronization and apply the standard re-synchronization procedure.'
+  record 2: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S4.2 (rrc_reconfig)] Check the PDCP sequence number of the reconfiguration delivery attempt.'
+  record 3: strict_format=True cites_before_step=True answer="[cites Internal Debug Spec S2.2 (mac_sched)] Collect the scheduler's allocation trace for the conflicting TTI before filing against the UE."
+  record 4: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S2.4 (mac_bsr)] Verify the BSR prohibit timer value is not misconfigured for the logical channel.'
+  record 5: strict_format=True cites_before_step=True answer="[cites Internal Debug Spec S4.1 (rrc_reest)] Cross-reference the reestablishment cause value against the originating RLC layer's radio link failure trigger."
+  record 6: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S1.5 (phy_srs)] Verify the power-headroom table mismatch between UE capability and configured Pmax.'
+  record 7: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S2.3 (mac_rach)] Check the PRACH configuration density before assuming a coverage issue.'
+  record 8: strict_format=True cites_before_step=True answer="[cites Internal Debug Spec S3.1 (rlc_buf)] Escalate the bearer's radio link failure timer configuration, not the retransmission buffer size."
+  record 9: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S5.3 (nas_tau)] Confirm this is expected after prolonged inactivity and not a defect.'
+  record 10: strict_format=True cites_before_step=True answer="[cites Internal Debug Spec S3.5 (rlc_status)] Verify this is a stale-report case where the sender's transmission window has already advanced past the NACK sequence number."
+  record 11: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S4.2 (rrc_reconfig)] Check the PDCP sequence number of the reconfiguration delivery attempt.'
+  record 12: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S5.2 (nas_auth)] Check for USIM/AuC sequence number desynchronization and apply the standard re-synchronization procedure.'
+  record 13: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S5.5 (nas_sec)] Verify the NAS security context was not reset asymmetrically between UE and network.'
+  record 14: strict_format=True cites_before_step=True answer='[cites Internal Debug Spec S2.1 (mac_harq)] Trigger a modulation and coding scheme downgrade recommendation before the transport block is discarded.'
+Strict internal-tag-id format compliance: 15/15
+Cites-something-before-step compliance (any id spelling): 15/15

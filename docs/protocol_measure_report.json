@@ -1,0 +1,29 @@
+{
+  "n_logs": 22000,
+  "macro_f1": 0.9557228907482547,
+  "n_train": 17600,
+  "n_test": 4400,
+  "residue_count": 2406,
+  "residue_frac": 0.10936363636363636,
+  "escalated_count": 2406,
+  "escalated_citation_compliance": "2406/2406",
+  "token_cost": {
+    "n_total": 22000,
+    "n_residue": 2406,
+    "residue_frac": 0.10936363636363636,
+    "avg_naive_tokens_per_log": 1345.4233333333334,
+    "avg_escalated_tokens_per_log": 120.61,
+    "total_naive_tokens_extrapolated": 29599313.333333336,
+    "total_escalated_tokens_extrapolated": 290187.66,
+    "cost_ratio": 0.009803864594156124,
+    "cost_reduction_factor": 102.00059276584447,
+    "encoding": "cl100k_base",
+    "sample_n_naive": 300,
+    "sample_n_residue": 300
+  },
+  "llm_crosscheck": {
+    "cites_before_step_compliant": 15,
+    "strict_format_compliant": 15,
+    "sample_size": 15
+  }
+}

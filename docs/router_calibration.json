@@ -1,0 +1,20 @@
+{
+  "description": "deterministic_router.py confidence threshold calibration: trigram-Jaccard best_match score distribution over the full 22,000-log corpus at corrupt_rate=0.4, and the residue fraction each threshold would produce.",
+  "corruption_rate_sweep_for_macro_f1": [
+    {"corrupt_rate": 0.0, "macro_f1": 1.0, "note": "suspicious 100%, trivial lookup, see README Findings"},
+    {"corrupt_rate": 0.08, "macro_f1": 0.9998},
+    {"corrupt_rate": 0.2, "macro_f1": 0.9955},
+    {"corrupt_rate": 0.3, "macro_f1": 0.9877},
+    {"corrupt_rate": 0.4, "macro_f1": 0.9557, "chosen": true},
+    {"corrupt_rate": 0.5, "macro_f1": 0.8927}
+  ],
+  "best_match_score_percentiles_at_corrupt_rate_0_4": {
+    "p0": 0.0, "p10": 0.0556, "p11": 0.0617, "p25": 0.0857, "p50": 0.1236, "p75": 0.1642, "p90": 0.2055, "p100": 0.3968
+  },
+  "threshold_sweep": [
+    {"threshold": 0.0556, "residue_frac": 0.0853},
+    {"threshold": 0.0617, "residue_frac": 0.1094, "chosen": true},
+    {"threshold": 0.0679, "residue_frac": 0.1428}
+  ],
+  "note": "The threshold is set to the 11th percentile of the full corpus's own match-score distribution, which is why the measured residue fraction (10.94%) lands close to the claimed 11% almost by construction, disclosed as such in the README rather than presented as an emergent result."
+}
