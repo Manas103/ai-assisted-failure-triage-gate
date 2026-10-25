@@ -7,3 +7,10 @@ __pycache__/
 # DuckDB store is regenerable data, not source; regenerate with:
 #   PYTHONPATH=src python src/triage/generate_records.py data/failures.duckdb
 data/*.duckdb
+
+# DV extension's 12,000-record corpus is regenerable; regenerate with:
+#   PYTHONPATH=src python -m triage.dv.generate_dv_records data/dv_records.jsonl
+data/dv_records.jsonl
+# Verilator build artifacts (also built outside this tree, under the WSL home directory, to
+# avoid GNU Make's refusal to build in a path with spaces; see sim_repro_gate.py)
+data/dv_build/

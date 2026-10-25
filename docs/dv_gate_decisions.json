@@ -1,0 +1,66 @@
+[
+  {
+    "block": "prim_crc32",
+    "testplan_id": "PRIM_CRC32_FUNCTIONAL_0001",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 2.07
+  },
+  {
+    "block": "prim_arbiter_fixed",
+    "testplan_id": "PRIM_ARBITER_FIXED_PRIORITY_0002",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.4
+  },
+  {
+    "block": "prim_slicer",
+    "testplan_id": "PRIM_SLICER_CHUNK_INDEX_0003",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.35
+  },
+  {
+    "block": "prim_max_tree",
+    "testplan_id": "PRIM_MAX_TREE_BOTH_VALID_0004",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.4
+  },
+  {
+    "block": "prim_onehot_check",
+    "testplan_id": "PRIM_ONEHOT_CHECK_CONFLICT_GATE_0005",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.5
+  },
+  {
+    "block": "prim_sum_tree",
+    "testplan_id": "PRIM_SUM_TREE_SINGLE_VALID_0006",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.43
+  },
+  {
+    "block": "prim_leading_one_ppc",
+    "testplan_id": "PRIM_LEADING_ONE_PPC_PREFIX_0007",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.42
+  },
+  {
+    "block": "prim_onehot_enc",
+    "testplan_id": "PRIM_ONEHOT_ENC_BIT_SELECT_0008",
+    "suspect_passed": false,
+    "fix_passed": true,
+    "accepted": true,
+    "elapsed_s": 1.38
+  }
+]

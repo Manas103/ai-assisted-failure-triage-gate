@@ -1,0 +1,18 @@
+{
+  "n_records": 12000,
+  "n_signatures": 40,
+  "n_real_signatures": 8,
+  "n_blocks": 8,
+  "accuracy": 0.9460833333333334,
+  "macro_f1": 0.9467167014118271,
+  "filed": 8,
+  "rejected": 0,
+  "unproven_attributions_filed": 0,
+  "timing": {
+    "n_sample": 40,
+    "manual_median_s": 0.0632995999767445,
+    "manual_found_count": 23,
+    "tool_median_s": 0.00022975000320002437,
+    "speedup_x": 275.51512119734235
+  }
+}

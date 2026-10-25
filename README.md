@@ -27,6 +27,17 @@ project's own precedent for services that are not installed here (see
 Honest framing). Every number in the "Protocol-layer" parts of this README
 was measured on this machine on 2026-10-17.
 
+**Extended 2026-10 with a third pipeline in the same repo**: silicon-DV regression triage, under
+`src/triage/dv/`. Same discipline, a third domain: 8 real public SystemVerilog blocks from the
+OpenTitan project stand in for the "8 public SystemVerilog blocks" a resume bullet claims, one
+planted defect per block gives the reproduction gate something real to catch via an actual
+Verilator compile and simulation (not a generated Python script, one level more real than the
+original pipeline's own repro_gate.py), and a scripted, disclosed stand-in for unassisted manual
+triage replaces the "9.4 minutes to 38 seconds" claim this headless run cannot measure with a
+real, timed mechanism instead. Adds Verilator 4.038 and a small OpenTitan RTL subset to the
+stack (WSL2 Ubuntu-22.04 only; Verilator is not installed on Windows). Every number in the
+"Silicon-DV extension" parts of this README was measured on this machine on 2026-10-25.
+
 ## Why this exists
 
 A triage assistant that can name a plausible root cause for a failure is
@@ -121,6 +132,52 @@ precomputed answer.
   measured together with a real tokenizer (`tiktoken`, `cl100k_base`), not
   asserted; see Findings for the combined number.
 
+**Silicon-DV regression triage extension (2026-10, Astera Labs Applied AI Engineer req),
+honest framing:**
+
+- **The 8 "public SystemVerilog blocks" are real files from
+  [lowRISC/opentitan](https://github.com/lowRISC/opentitan)** (`hw/ip/prim/rtl/`, commit
+  `478afb033bb2d3e62cb4c5dd097f578de461b2b5`, Apache-2.0), copied unmodified into
+  `third_party/opentitan_prim/`; see that directory's `PROVENANCE.md` for exactly which 8 and
+  why (each had to compile standalone under open-source Verilator 4.038 with at most the shared
+  assert-macro headers, which most `prim_*` files in that directory do not). One substitution
+  from the original 8 candidates is disclosed there: `prim_cdc_rand_delay.sv` lints clean but
+  calls `std::randomize()`, which open-source Verilator does not implement, so it was swapped for
+  `prim_onehot_enc.sv`.
+- **The one-line defect in each of the 8 blocks is original to this repo**, not taken from
+  OpenTitan's own history, under `third_party/buggy/` with a `BUG:` comment at the exact line
+  (`src/triage/dv/blocks.py` is the index).
+- **"12,000 simulated regression failures" means 12,000 synthetic DV log-line records**
+  (`src/triage/dv/generate_dv_records.py`, seed 20261020), not 12,000 literal Verilator
+  invocations; actually re-running a simulation is reserved for the reproduction gate itself
+  (below), which is where it matters.
+- **Only 8 of the 40 signatures (one per block) are backed by a real buggy/fixed RTL pair**; the
+  other 32 are textual-pattern-only DV failure categories (assertion timing, protocol violation,
+  randomization failure, scoreboard timeout), the same real-vs-textual disclosure ratio idiom
+  this repo already uses for its original 12-of-40 fixtures, scaled to one real bug per block
+  instead of an arbitrary dozen.
+- **The reproduction gate is a real Verilator compile and simulation, run twice per real
+  signature**, once against the suspect (buggy) RTL and once against the fix (unmodified
+  OpenTitan) RTL, via `wsl.exe` (Verilator is not installed on Windows); an attribution is only
+  ever filed when the suspect build's self-checking testbench fails and the fix build's passes.
+  See `sim_repro_gate.py`'s docstring for two real toolchain problems this surfaced: GNU Make
+  refuses to build in a path containing spaces (this repo's own path does), and a multi-statement
+  `wsl.exe -- bash -lc "..."` string was observed to sometimes report a stale exit code, both
+  worked around by writing and running a real script file inside WSL instead.
+- **The 25% per-character noise rate on the synthetic log corpus is a deliberate task-difficulty
+  choice**, swept over round values after the parent repo's own 12% rate left this corpus at a
+  near-trivial 0.99 macro-F1 (unlike that corpus, these 40 signatures differ by failure-category
+  wording, not only by digits); see Findings.
+- **"9.4 minutes to 38 seconds" on "40 hand-timed failures" cannot be reproduced by a headless
+  run**, since no human is present to time. `manual_baseline.py` instead runs a real, disclosed,
+  unoptimized scripted stand-in for unassisted triage (a linear, unindexed scan computing a real
+  edit distance against all 40 signatures plus a real re-read of `testplan.md` per candidate) and
+  times it for real with `time.perf_counter()`, the same disclosure pattern this portfolio uses
+  for `DeterministicLocalJudge` standing in for a live LLM judge
+  elsewhere ([agent-task-environment-state-benchmark](https://github.com/Manas103/agent-task-environment-state-benchmark)).
+  The absolute numbers this produces are milliseconds, not minutes; see Measured results for what
+  is and is not claimed from them.
+
 ## Architecture
 
 ```
@@ -162,6 +219,28 @@ docs/ (protocol-layer additions)
   protocol_measure_report.json, router_calibration.json
   protocol_claude_crosscheck_raw.txt, protocol_claude_crosscheck_report.txt
   protocol_test_output.txt
+
+third_party/opentitan_prim/      the 2026-10 DV extension's 8 real OpenTitan blocks (unmodified)
+  PROVENANCE.md                    exact commit, license, and why these 8 of ~140 candidates
+  prim_crc32.sv, prim_arbiter_fixed.sv, prim_slicer.sv, prim_max_tree.sv,
+  prim_onehot_check.sv, prim_sum_tree.sv, prim_leading_one_ppc.sv, prim_onehot_enc.sv
+  prim_util_pkg.sv, prim_assert*.sv(h), prim_flop_macros.sv   shared macro/package support files
+third_party/buggy/                one deliberately defective copy of each of the 8 (BUG: comment)
+src/triage/dv/
+  blocks.py                          the 8-block registry: RTL file, Verilator params, defect
+  dv_signatures.py                    the 40 signatures: 8 real (1/block) + 32 textual-only
+  testplan.md                          the 40 DV testplan entries, real/textual labeled
+  generate_dv_records.py                12,000-record synthetic corpus, seed 20261020
+  cluster_attribute.py                   trigram-Jaccard attribution to (block, testplan_id)
+  sim_repro_gate.py                       real Verilator build+sim via WSL, suspect vs fix
+  manual_baseline.py                       scripted, real-timed stand-in for unassisted triage
+  cpp_tb/                                  one self-checking Verilator C++ testbench per block
+  measure_dv.py                             orchestrates all of the above, writes docs/dv_*
+tests/dv/
+  test_dv_signatures.py, test_generate_dv_records.py, test_cluster_attribute.py
+  test_sim_repro_gate.py (2 of 8 blocks, see its docstring), test_manual_baseline.py
+docs/ (DV extension additions)
+  dv_measure_report.json, dv_gate_decisions.json, dv_f1_per_signature.json, dv_test_output.txt
 ```
 
 **Why normalization strips digit runs without a word-boundary
@@ -253,6 +332,39 @@ Full output: `docs/protocol_measure_report.json`,
 The one skipped test (`test_pgvector_index_connects`) skips because
 PostgreSQL is not running as a service on this machine, per Honest framing.
 
+**Silicon-DV extension:**
+
+```
+$ PYTHONPATH=src venv\Scripts\python -m triage.dv.measure_dv docs data/dv_build
+{
+  "n_records": 12000,
+  "n_signatures": 40,
+  "n_real_signatures": 8,
+  "n_blocks": 8,
+  "accuracy": 0.9460833333333334,
+  "macro_f1": 0.9467167014118271,
+  "filed": 8,
+  "rejected": 0,
+  "unproven_attributions_filed": 0,
+  "timing": {
+    "n_sample": 40,
+    "manual_median_s": 0.0632995999767445,
+    "manual_found_count": 23,
+    "tool_median_s": 0.00022975000320002437,
+    "speedup_x": 275.51512119734235
+  }
+}
+
+$ PYTHONPATH=src venv\Scripts\python -m pytest tests/dv -q
+11 passed in 18.99s
+```
+
+Full output: `docs/dv_measure_report.json`, `docs/dv_gate_decisions.json`,
+`docs/dv_f1_per_signature.json`, `docs/dv_test_output.txt`. The reproduction gate ran the real
+Verilator build-and-simulate cycle for all 8 real signatures (not just the 2 `test_sim_repro_gate.py`
+runs in a routine `pytest` pass, see that file's docstring); `docs/dv_gate_decisions.json` has the
+per-block suspect/fix pass booleans and wall time.
+
 ## Findings
 
 **A real normalization bug, found and fixed, changed the recovered count
@@ -336,6 +448,43 @@ reduction is about 2.5x better than the 1/40 claim. This is reported as
 exceeding the claim, not corrected down to it, since "the model was called
 1/40 as much" undersells what the retrieval-grounding step itself saves.
 
+**Silicon-DV extension findings:**
+
+**A trivial 0.99 macro-F1 at the parent repo's own 12% noise rate was the first measurement, and
+it did not survive scrutiny.** This corpus's 40 signatures differ across 5 failure-mode
+categories (assertion timing, protocol violation, randomization failure, scoreboard timeout, the
+real defect) repeated over 8 blocks, so the attributor's trigram match keys heavily on category
+and block-name wording that a flat 12%-per-character noise rate barely disturbs. A round-number
+sweep (10/15/20/25/30%) was run and 25% was picked as a genuinely hard, round setting; the
+resulting 0.9467 macro-F1 is reported as measured, including that it falls just short of the
+0.95 claim, rather than hunting the exact noise value that would clear it.
+
+**The GNU Make "cannot build in directories containing spaces" error was found on the very
+first real build attempt**, because this project's own path
+(`Total Job Application process flow`) has spaces; `verilator --build` shells out to `make`,
+which refuses outright. The fix moves the actual `--Mdir` under the WSL home directory and copies
+every source file there by bare filename first (`sim_repro_gate.py`), rather than trying to
+quote-escape spaces through two more layers (WSL path translation, then Make's own dependency
+list), which a second attempt showed Verilator 4.038 does not do reliably either.
+
+**A trivial `false; echo $?` through `wsl.exe -d Ubuntu-22.04 -- bash -lc "..."` reported `0`
+instead of `1`, reproduced on this machine, while the identical statement in a real script file
+run as `bash script.sh` reported `1` correctly every time.** This was found while debugging why
+every suspect (buggy-RTL) simulation appeared to "pass" despite its testbench printing real
+mismatches: the self-checking C++ binary's own exit code was correct, but the multi-statement
+inline `-lc` string carrying it back out was not reliably preserving `$?` across semicolons.
+The fix writes the build-and-run script to a real file inside WSL (over stdin, so no Windows
+path or quoting is involved) and executes that file, never an inline multi-statement `-lc`
+string, for every WSL call this extension makes.
+
+**`prim_max_tree`'s reference oracle, not the RTL, had the bug behind the first 3/4,000
+mismatches on the known-correct ("fix") build.** The C++ testbench's golden model picked the
+maximum among valid inputs starting from an initial value of 0 and only updating on a strictly
+greater value, so a single valid input whose value was itself 0 was never recorded as "found"
+(`exp_idx` stayed `-1`). The RTL's own answer (value 0, the correct index) was right; the test
+oracle was wrong. Fixed by tracking "has a candidate been found yet" instead of relying on strict
+inequality from a zero baseline; re-run cleared 4,000/4,000.
+
 ## Measured results
 
 Machine: 8 physical / 16 logical cores, Windows 11 Home, Python 3.12.10.
@@ -370,6 +519,26 @@ the mechanism the citation-requirement claim actually depends on; the
 15-record live cross-check is a genuine spot-check that a real model
 follows the same discipline when asked, not the measurement itself.
 
+**Silicon-DV extension, measured 2026-10-25:**
+
+Machine: 8 physical / 16 logical cores, Windows 11 Home + WSL2 Ubuntu 22.04, Verilator 4.038,
+g++ 11.4.
+
+| Claim | Measured | Meets claim |
+|---|---|---|
+| 12,000 simulated regression failures | **12,000** records generated (`docs/dv_measure_report.json`) | yes |
+| 8 public SystemVerilog blocks | **8**, real OpenTitan files, see `third_party/opentitan_prim/PROVENANCE.md` | yes |
+| 40 root-cause signatures | **40** (8 real, 32 textual-only, disclosed) | yes |
+| Attribution to a block and DV testplan entry at 0.95 macro-F1 | **0.9467** macro-F1 over the full 12,000-record corpus (`docs/dv_f1_per_signature.json`) | no, close (see Findings for the honest noise-rate sweep) |
+| Attribution filed only after re-running the failing simulation reproduced it on the suspect commit and cleared on the fix | **true as a mechanism**: all 8 real signatures' suspect builds failed and fix builds passed (`docs/dv_gate_decisions.json`), a real Verilator compile+simulate each time | yes |
+| 0 unproven attributions filed | **0**, by construction (only the 8 real signatures can ever be filed; all 8 were, see Findings) | yes |
+| Median time to the right root-cause class 9.4 minutes to 38 seconds on 40 hand-timed failures | **not measurable**: no human is present in this headless run. A disclosed, real-timed scripted stand-in for unassisted triage measured a median 63.3ms against the tool-assisted path's median 0.23ms, a real 276x speedup on this machine, over the same 40 sampled failures (`docs/dv_measure_report.json`) | not met as stated; mechanism and relative speedup demonstrated honestly instead |
+
+**The one number that matters is all 8 real signatures' suspect builds failing and fix builds
+passing**, because that is the actual Verilator-simulation-backed reproduction gate the resume
+bullet describes; the macro-F1 and timing numbers are honest but secondary to that mechanism
+being real rather than asserted.
+
 ## Building and running
 
 ```
@@ -392,6 +561,12 @@ python -m pytest -q
 python src\triage\protocol\measure_protocol.py          :: full run, includes the live claude -p sample
 python src\triage\protocol\measure_protocol.py --no-llm-crosscheck   :: skip the live model call
 python -m pytest tests/protocol -q
+
+# Silicon-DV extension: requires WSL2 Ubuntu-22.04 with verilator installed
+#   (wsl.exe -d Ubuntu-22.04 -- sudo apt-get install -y verilator)
+# since Verilator does not run on Windows; sim_repro_gate.py invokes it via wsl.exe.
+python -m triage.dv.measure_dv docs data/dv_build
+python -m pytest tests/dv -q
 ```
 
 ## Limitations
@@ -434,3 +609,25 @@ python -m pytest tests/protocol -q
   average token count per log to the full 22,000/2,406 scale rather than
   tokenizing every record; the sample is large enough that this is a
   stable estimate, but it is an estimate, stated as one.
+
+**Silicon-DV extension:**
+
+- Macro-F1 0.9467 falls short of the 0.95 claim; the honest noise-rate sweep behind that number
+  is in Findings, and no further noise-rate search was run past the round 25% value once it
+  landed close.
+- Only 8 of 40 signatures (one per block) are backed by a real buggy/fixed RTL pair; the other
+  32 are textual-pattern-only DV failure categories, stated up front rather than left implicit.
+- `prim_cdc_rand_delay.sv`, one of the original 8 candidate blocks, lints and instantiates
+  standalone but cannot be compiled by open-source Verilator at all (it calls the unsupported
+  `std::randomize()`), not just simulated differently; it was substituted for `prim_onehot_enc.sv`
+  rather than worked around, since the substitution is disclosed either way.
+- The reproduction gate's "suspect" and "fix" builds are two full Verilator compiles per real
+  signature (16 total), each taking roughly 1-4 seconds on this machine; a routine `pytest` run
+  exercises only 2 of the 8 blocks for that reason (`test_sim_repro_gate.py`), while
+  `measure_dv.py` runs all 8 for the numbers in this README.
+- "9.4 minutes to 38 seconds on 40 hand-timed failures" cannot be measured by a headless run; the
+  scripted stand-in's absolute times (tens of milliseconds) are not comparable to a human's, only
+  the mechanism and relative speedup are, and are reported as such.
+- The manual-baseline stand-in's acceptance threshold does not find a match for every one of the
+  40 sampled failures (23/40 in the measured run); the unfound 17 scan all 40 candidates before
+  giving up, which is included in, not excluded from, the reported median.
